@@ -12,6 +12,22 @@ void main() {
   group('ProdutosApi', () {
     late ProdutosApi produtosApi;
 
+    test('deve exibir informações corretas do produto no formato adequado', () {
+
+      final produtoAcao = ProdutoFinanceiro(
+        nome: 'Ação XYZ',
+        tipo: 'Ação',
+        precoAtual: 100.0,
+        variacao: 2.5,
+        categoria: CategoriaProduto(nome: 'Ação', descricao: 'Ação de Empresa'),
+    );
+
+      expect(produtoAcao.nome, 'Ação XYZ');
+      expect(produtoAcao.precoAtual, 100.0);
+      expect(produtoAcao.variacao, 2.5);
+      expect(produtoAcao.categoria.nome, 'Ação');
+    });
+
     test('addProduto deve adicionar um novo produto com sucesso', () async {
       final mockClient = MockClient((request) async {
         return http.Response('', 201);
